@@ -1,5 +1,7 @@
 # Personal standard environment manager
 
+Usage: `bash -c "$(curl std.z-yx.net)"`
+
 ## Shell
 
 + [`.profile`](./home/.profile) Shell profile (shared)
