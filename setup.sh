@@ -2,7 +2,7 @@
 OS=$(uname -s)
 
 REMOTE="https://github.com/zhangyx1998/std-env.git"
-LOCAL="/usr/local/std-env"
+LOCAL="/opt/std-env"
 
 echo "Setting up STD-ENV for ${OS}..."
 
@@ -16,11 +16,12 @@ fi
 if [ ! -d /usr/local/std-env ]; then
   echo "Cloning from ${REMOTE} into ${LOCAL}..." \
   && sudo git clone ${REMOTE} ${LOCAL} \
+  && sudo git config --global --add safe.directory ${LOCAL} \
   && cd ${LOCAL} \
   && make install
 else
   echo "Updating from ${REMOTE}..." \
   && cd ${LOCAL} \
-  && git pull origin master \
+  && sudo git pull origin master \
   && make install
 fi
