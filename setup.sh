@@ -1,8 +1,8 @@
 #!/bin/sh
 OS=$(uname -s)
 
-REMOTE:="https://github.com/zhangyx1998/std-env.git"
-LOCAL:="/usr/local/std-env"
+REMOTE="https://github.com/zhangyx1998/std-env.git"
+LOCAL="/usr/local/std-env"
 
 echo "Setting up STD-ENV for ${OS}..."
 
