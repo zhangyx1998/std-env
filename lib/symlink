@@ -10,7 +10,7 @@ DST=$2
 if [ ! -e ${DST} ]; then
     ln -s ${SRC} ${DST}
 elif [ $SRC != $(realpath $DST) ]; then
-    bin/confirm "Warning: ${DST} already exists, overwrite? [y/N] " \
+    bin/confirm "Warning: ${DST} already exists, overwrite? " \
     && ln -sf ${SRC} ${DST} \
     || echo "Aborted: file ${DST} unchanged."
 fi
