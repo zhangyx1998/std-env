@@ -1,0 +1,36 @@
+#! /bin/bash
+if [ ! -f Makefile ]; then
+    echo "No Makefile found under $(pwd)"
+    exit 1
+fi
+
+if ! command -v compiledb > /dev/null; then
+    echo "Command 'compiledb' not found. Please install it first" >&2
+    echo "Maybe: python3 -m pip install compiledb" >&2
+    exit 1
+fi
+
+filter() {
+    while read line; do
+        if is-compile-command $line; then
+            echo $line
+        fi
+    done
+}
+
+is-compile-command() {
+    local CMD=$1
+    if ! command -v $CMD > /dev/null; then
+        return 1
+    fi
+    case $(basename $CMD) in
+        cc|c++|*gcc*|*g++*|*clang*|*clang++)
+            return 0
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+}
+
+make --dry-run | filter | compiledb --command-style -f 
