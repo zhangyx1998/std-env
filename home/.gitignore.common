@@ -1,0 +1,9 @@
+# VSCode-Clangd related
+compile_commands.json
+compile_commands.txt
+.clangd
+.clang-format
+.cache
+
+# A hidden playground for code unintended for commit
+.playground/

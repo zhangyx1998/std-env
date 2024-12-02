@@ -1,0 +1,8 @@
+[user]
+	name = Yuxuan Zhang
+	email = github@z-yx.cc
+[init]
+	defaultBranch = master
+[core]
+	editor = code --wait
+	excludesfile = ~/.gitignore.common

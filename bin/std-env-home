@@ -1,0 +1,11 @@
+#!/bin/sh
+if [ -z $STD_ENV_HOME ]; then
+    STD_ENV_HOME=$(dirname $(dirname $(realpath $0)))
+fi
+
+if [ -d $STD_ENV_HOME ] && [ -e $STD_ENV_HOME/STD_ENV ]; then
+    echo "$STD_ENV_HOME"
+else
+    echo "Error: std-env cannot find its home directory" >&2
+    exit -1
+fi

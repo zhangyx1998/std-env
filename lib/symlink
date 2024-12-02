@@ -1,0 +1,18 @@
+#!/bin/sh
+if [ "$#" -ne 2 ] || ! [ -f "$1" ]; then
+  echo "Usage: $0 <src> <link-name>" >&2
+  exit 1
+fi
+
+SRC=$(realpath $1)
+DST=$2
+
+if [ ! -e ${DST} ]; then
+    ln -s ${SRC} ${DST}
+elif [ $SRC != $(realpath $DST) ]; then
+    bin/confirm "Warning: ${DST} already exists, overwrite? [y/N] " \
+    && ln -sf ${SRC} ${DST} \
+    || echo "Aborted: file ${DST} unchanged."
+fi
+
+ls -l ${DST}

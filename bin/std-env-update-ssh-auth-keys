@@ -1,0 +1,53 @@
+#!/bin/bash
+SRCS=$HOME/.ssh/authorized_keys.sources
+DST=$HOME/.ssh/authorized_keys
+
+get_sources() {
+    grep -v '^\s*#' $SRCS | grep -v '^\s*$'
+}
+
+while true; do
+    if [ ! -f $SRCS ]; then
+        echo "# URL list of authorized key sources" > $SRCS
+    fi
+    URLS=$(get_sources)
+    if [ ! -z "$URLS" ]; then
+        echo "Current sources:"
+        for URL in $URLS; do
+            echo "> $URL"
+        done
+        confirm "Edit source list?" || break
+        nano $SRCS
+    else
+        echo "No sources found. Please add some URLs."
+        nano $SRCS
+    fi
+done
+
+# Read all URLs from the file, excluding comments and empty lines
+URLS=$(get_sources)
+
+# Download all keys from the URLs
+cp "$DST" "$DST.bak"
+rm "$DST.tmp" 2>/dev/null
+for URL in $URLS; do
+    echo "# $URL" >> "$DST.tmp"
+    curl -s $URL >> "$DST.tmp"
+    echo "" >> "$DST.tmp"
+done
+
+# Show visual diff when possible
+if [ -f $HOME/.ssh/authorized_keys ] && (command -v diff >/dev/null); then
+    diff -u --color='auto' "$DST.bak" "$DST.tmp"; CHANGED=$?
+    if [ $CHANGED -eq 0 ]; then
+        echo "[No changes detected]"
+        exit 0
+    fi
+else
+    cat "$DST.tmp"
+fi
+
+# Ask for confirmation before updating the keys
+confirm "Update authorized_keys with the new keys?" \
+&& mv "$DST.tmp" "$DST" \
+|| echo "Aborted: authorized_keys unchanged."

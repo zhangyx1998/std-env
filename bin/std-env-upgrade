@@ -1,0 +1,6 @@
+#!/bin/sh
+std-env-home || exit 1
+cd $(std-env-home)
+
+git status
+git pull

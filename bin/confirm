@@ -1,0 +1,15 @@
+#!/bin/sh
+ABORTED=false
+while true; do
+    read -p "$* [Y/n] " answer || ABORTED=true
+    if $ABORTED; then
+        echo
+        echo "Aborted"
+        exit 1
+    fi
+    case $answer in
+        [Yy]* ) exit 0;;
+        [Nn]* ) exit 1;;
+        * ) echo "Invalid response.";;
+    esac
+done
