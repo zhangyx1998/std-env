@@ -2,5 +2,5 @@
 std-env-home || exit 1
 cd $(std-env-home)
 
-git status
-git pull
+sudo git pull
+make install
