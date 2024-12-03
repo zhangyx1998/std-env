@@ -9,6 +9,6 @@ sudo apt install -y \
     zip unzip vim htop tree \
     python-is-python3 \
     python3-pip python3-venv \
-    ffmpeg
+    ffmpeg vim nano
 
 python3 -m pip install --break-system-packages --user -r $BASE/scripts/requirements.txt

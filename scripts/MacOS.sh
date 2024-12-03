@@ -18,7 +18,7 @@ fi
 brew install \
     git curl wget \
     zip unzip vim htop tree \
-    python ffmpeg
+    python ffmpeg vim nano
 
 # Python packages
 python3 -m pip install --upgrade pip
