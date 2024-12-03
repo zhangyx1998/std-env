@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "Iniaitlizing STD-ENV for Debian..."
 # Install command line tools
 sudo apt update && sudo apt upgrade -y

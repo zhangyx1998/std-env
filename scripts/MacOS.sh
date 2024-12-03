@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "Iniaitlizing STD-ENV for MacOS..."
 
 BASE=$(dirname $(dirname $(realpath $0)))
