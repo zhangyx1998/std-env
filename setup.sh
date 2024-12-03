@@ -13,11 +13,11 @@ if [ ! -d ${HOME} ] || [ ! -r ${HOME} ] || [ ! -w ${HOME} ]; then
 fi
 
 # Set up the environment
-if [ ! -d /usr/local/std-env ]; then
+if [ ! -d "${LOCAL}" ]; then
   echo "Cloning from ${REMOTE} into ${LOCAL}..." \
   && sudo git clone ${REMOTE} ${LOCAL} \
   && sudo git config --global --add safe.directory ${LOCAL} \
-  && cd ${LOCAL} \
+  && cd "${LOCAL}" \
   && make install
 else
   echo "Updating from ${REMOTE}..." \
